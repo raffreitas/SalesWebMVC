@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SalesWebMVC.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SalesWebMVCContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SalesWebMVCContext") ?? throw new InvalidOperationException("Connection string 'SalesWebMVCContext' not found.")));
+    options.UseMySql(builder.Configuration.GetConnectionString("SalesWebMVCContext"),
+        new MySqlServerVersion(new Version(8, 3, 0)), builder =>
+            builder.MigrationsAssembly("SalesWebMVC")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

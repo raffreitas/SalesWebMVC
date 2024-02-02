@@ -16,3 +16,4 @@ namespace SalesWebMVC.Models
         public DbSet<SalesWebMVC.Models.Department> Department { get; set; } = default!;
     }
 }
+
